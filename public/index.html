@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>City Actions</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    <link rel="stylesheet" href="stylesheets/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>	
+	<script src="js/city_actions.js" type="text/javascript"></script>
+	<style>
+	 @media only screen and (max-width: 500px) {
+            img.bluemix_logo_menubar { 
+                display: none; 
+            }
+			body, html
+			{
+				margin-top: 50px;
+			}
+			.menubar
+			{
+				height: 100px;
+			}
+			.main_content
+			{
+				margin-top: 50px;
+			}
+			.menu_buttons
+			{
+				font-size: 1.25min;
+			}
+			.center-logo
+			{
+				border-radius: 0px;
+			}
+     }
+	</style>
+  </head>
+
+  <body>
+    <div class="menubar">
+	 <div class="center-logo">
+	   
+		<table style="width: 100%">
+			<tr>
+				<td style="align:center;"> <img class="bluemix_logo_menubar" src="images/bluemix_logo.png" alt="Bluemix logo" width="100" height="100" style="margin-left:20px"> </td>
+				<td class="page_title" style="text-align:center;color: #2C3E50; font-size: 2.5vmin">CITY NAME ACTIONS</td>		
+				<td> 
+					<form action="/view_cities" method="GET" name="outcome" id="outcome">
+						<input id="allcities" type="hidden" name="allcities" value="allcities">
+						<input id="view_city" class="menu_buttons" type="submit" value="View Cities" style="font-size: 1.9vmin">
+					</form>
+				</td>
+				<td>
+					<button class="menu_buttons" type="button" onclick="show_new_city_form()" style="font-size: 1.9vmin">Add cities</button>
+				</td>
+				<td>
+					<button class="menu_buttons" type="button" onclick="show_remove_city_form()" style="font-size: 1.9vmin">Remove cities</button>
+				</td>
+			<tr>
+		  </table>		
+	  </div>
+	</div>
+	
+	<div class="main_content">
+	
+		<div id="add_new_city_form" style="display:none">
+			<form action="/add_city" method="GET" name="outcome" id="outcome">
+				Enter city name to be added : 
+				<input id="newcityname" type="text" name="newcityname">
+				<br><br>
+				<input id="add_city_button" class="menu_buttons" type="submit" value="Add City" style="font-size: 1.9vmin">
+			</form>
+		</div>
+		
+		<div id="added_city" style="display:none">
+			Added City
+		</div>
+		
+		<div id="duplicate_city" style="display:none">
+			City is already present in the list. Please enter a new one. 
+		</div>
+		
+		<div id="db_insert_error" style="display:none">
+			Could not insert into database. Please try later. 
+		</div>
+		
+		<div id="db_read_error" style="display:none">
+			Could not read database to check for current city. Please try later. 
+		</div>
+		
+		<div id="removed_city" style="display:none">
+			Removed City.
+		</div>
+		
+		<div id="could_not_remove" style="display:none">
+			Could not remove city from list. Please check Database.
+		</div>
+		
+		<div id="remove_city_form" style="display:none">
+			<form action="/remove_city" method="GET" name="outcome" id="outcome">
+				Enter city name to be removed : 
+				
+				<select name="cities_to_be_removed" id="cities_to_be_removed">
+				
+				</select>
+
+				<br><br>
+				<input id="remove_city_button" class="menu_buttons" type="submit" value="Remove City" style="font-size: 1.9vmin">
+			</form>
+		</div>
+		
+		<div id="show_all_cities" style="display:none">
+
+		</div>	
+	</div>
+	
+	<script>
+		function show_new_city_form()
+		{
+			document.getElementById("add_new_city_form").style.display="block";
+			document.getElementById("remove_city_form").style.display="none";
+			document.getElementById("show_all_cities").style.display="none";
+			document.getElementById("added_city").style.display="none";
+			document.getElementById("removed_city").style.display="none";
+			document.getElementById("newcityname").value="";
+			document.getElementById("duplicate_city").style.display="none";
+			document.getElementById("db_insert_error").style.display="none";
+			document.getElementById("db_read_error").style.display="none";
+			document.getElementById("could_not_remove").style.display="none";
+			document.getElementById("db_read_error").style.display="none";
+		}
+	
+		function show_remove_city_form()
+		{
+			document.getElementById("add_new_city_form").style.display="none";
+			document.getElementById("remove_city_form").style.display="block";
+			document.getElementById("show_all_cities").style.display="none";
+			document.getElementById("added_city").style.display="none";
+			document.getElementById("removed_city").style.display="none";
+			document.getElementById("duplicate_city").style.display="none";
+			document.getElementById("db_insert_error").style.display="none";
+			document.getElementById("db_read_error").style.display="none";
+			document.getElementById("could_not_remove").style.display="none";
+			document.getElementById("db_read_error").style.display="none";
+		}
+	</script>
+	
+  </body>
+</html>
